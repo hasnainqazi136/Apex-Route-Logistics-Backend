@@ -9,6 +9,19 @@ from .services.hos_engine import plan_trip_hos
 from .services.eld_generator import generate_eld_sheets
 
 @api_view(["GET"])
+def api_root(request):
+    return Response({
+        "status": "online",
+        "service": "Apex Route Logistics - ELD API",
+        "version": "1.0.0",
+        "endpoints": {
+            "health": "/api/health/",
+            "geocode": "/api/geocode/?q={query}",
+            "plan_trip": "/api/plan-trip/"
+        }
+    })
+
+@api_view(["GET"])
 def health_check(request):
     return Response({"status": "healthy", "service": "ELD Route Planner API"})
 
